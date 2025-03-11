@@ -27,7 +27,7 @@ async function getCharacters(
   );
 
   const data = await response.json();
-  // console.log(data, status);
+  console.log(data);
 
   return data;
 }
@@ -79,7 +79,7 @@ export default async function CharactersPage({
         </div>
         {"error" in characters ? (
           <p className="text-center text-xl text-red-500 mt-10">
-            Oops! It seems like nobody's here
+            Oops! It seems like nobody is here
           </p>
         ) : (
           <div className="w-full p-4">
@@ -91,7 +91,7 @@ export default async function CharactersPage({
           </div>
         )}
         {!("error" in characters) && (
-          <Pagination page={page} items={characters} />
+          <Pagination page={page} items={characters.info} />
         )}
       </div>
     </>

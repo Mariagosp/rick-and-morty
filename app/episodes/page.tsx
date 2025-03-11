@@ -1,6 +1,5 @@
 import { Episode } from "../types/Episode";
 import EpisodeCard from "../components/EpisodeCard";
-import SearchInput from "../components/SearchInput";
 import Pagination from "../components/Pagination";
 import { EpisodesResponse } from "../types/ApiResponse";
 import { Metadata } from "next";
@@ -45,7 +44,7 @@ const EpisodesPage = async ({
 
         {'error' in episodes ? (
           <p className="text-center text-xl text-red-500 mt-10">
-            Oops! It seems like nobody's here
+            Oops! It seems like nobody is here
           </p>
         ) : (
           <div className="w-full p-4">
@@ -57,7 +56,7 @@ const EpisodesPage = async ({
           </div>
         )}
         {!("error" in episodes) && (
-          <Pagination page={page} items={episodes} />
+          <Pagination page={page} items={episodes.info} />
         )}
       </div>
     </>

@@ -5,7 +5,12 @@ import { useRouter, useSearchParams } from "next/navigation";
 
 type Props = {
   page: number;
-  items: any;
+  items: {
+    count: number,
+    pages: number,
+    next: string | null,
+    prev: string| null,
+  };
 }
 
 const Pagination: React.FC<Props> = ({ page, items }) => {
@@ -30,7 +35,7 @@ const Pagination: React.FC<Props> = ({ page, items }) => {
       <span className="text-white text-lg">{page}</span>
       <Button
         onClick={() => changePage(page + 1)}
-        isDisabled={!items.info || !items.info.next} 
+        isDisabled={!items || !items.next} 
         colorScheme="blue"
         variant={"outline"}
       >

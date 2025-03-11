@@ -16,11 +16,10 @@ interface FormData {
 }
 
 const SearchInput: React.FC<Props> = ({ placeholder, isCode }) => {
-  const router = useRouter();
   const searchParams = useSearchParams();
   const updateSearchParams = useUpdateSearchParams();
 
-  const name = searchParams.get(!isCode ? "name" : "episode") || "";
+  // const name = searchParams.get(!isCode ? "name" : "episode") || "";
 
   const { control, handleSubmit, setValue } = useForm<FormData>({
     resolver: yupResolver(searchSchema),
@@ -30,7 +29,9 @@ const SearchInput: React.FC<Props> = ({ placeholder, isCode }) => {
   });
 
   const onSubmit = (data: FormData) => {
-    data.name && updateSearchParams(!isCode ? "name" : "episode", data.name);
+    if (data.name) {
+      updateSearchParams(!isCode ? "name" : "episode", data.name);
+    }
   };
 
   return (

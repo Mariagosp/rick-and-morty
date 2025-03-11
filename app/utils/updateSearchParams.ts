@@ -8,6 +8,7 @@ export function useUpdateSearchParams() {
 
   const updateSearchParams = (key: string, value: string) => {
     const params = new URLSearchParams(searchParams.toString());
+    // eslint-disable-next-line @typescript-eslint/no-unused-expressions
     value ? params.set(key, value) : params.delete(key);
     router.push(`?${params.toString()}`);
   };

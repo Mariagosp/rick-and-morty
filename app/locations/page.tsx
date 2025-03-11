@@ -55,7 +55,7 @@ const LocationsPage = async ({
 
       {"error" in locations ? (
         <p className="text-center text-xl text-red-500 mt-10">
-          Oops! It seems like nobody's here
+          Oops! It seems like nobody is here
         </p>
       ) : (
         <div className="w-full p-4">
@@ -66,7 +66,7 @@ const LocationsPage = async ({
           </div>
         </div>
       )}
-      {!("error" in locations) && <Pagination items={locations} page={page} />}
+      {!("error" in locations) && <Pagination items={locations.info} page={page} />}
     </div>
   );
 };

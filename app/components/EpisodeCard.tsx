@@ -1,4 +1,3 @@
-import Link from "next/link";
 import { Episode } from "../types/Episode";
 
 type Props = {
