@@ -17,12 +17,17 @@ async function getCharacter(id: string) {
   return response.json();
 }
 
+type PageProps = {
+  params: Promise<{
+    id: string
+  }>;
+};
+
 export default async function CharacterPage({
   params,
-}: {
-  params: Record<string, string>;
-}) {
-  const character: Character = await getCharacter(params.id);
+}: PageProps) {
+  const resolvedParams = await params;
+  const character: Character = await getCharacter(resolvedParams.id);
 
   return (
     <>

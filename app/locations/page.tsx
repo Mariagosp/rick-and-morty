@@ -28,14 +28,22 @@ async function getLocations(
   return data;
 }
 
+type PageProps = {
+  searchParams: Promise<{
+    name?: string;
+    page: number;
+    type: string;
+  }>;
+};
+
 const LocationsPage = async ({
   searchParams,
-}: {
-  searchParams: { name?: string; page: number; type: string };
-}) => {
-  const name = searchParams.name || "";
-  const page = Number(searchParams.page) || 1;
-  const type = searchParams.type || "";
+}: PageProps) => {
+  const resolvedSearchParams = await searchParams;
+
+  const name = resolvedSearchParams.name || "";
+  const page = Number(resolvedSearchParams.page) || 1;
+  const type = resolvedSearchParams.type || "";
   const locations: LocationsResponse = await getLocations(name, page, type);
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -66,7 +74,9 @@ const LocationsPage = async ({
           </div>
         </div>
       )}
-      {!("error" in locations) && <Pagination items={locations.info} page={page} />}
+      {!("error" in locations) && (
+        <Pagination items={locations.info} page={page} />
+      )}
     </div>
   );
 };

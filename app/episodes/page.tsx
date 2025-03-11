@@ -9,7 +9,11 @@ export const metadata: Metadata = {
   title: "Episodes))",
 };
 
-async function getEpisodes(name: string, page: number, episode: string): Promise<EpisodesResponse> {
+async function getEpisodes(
+  name: string,
+  page: number,
+  episode: string
+): Promise<EpisodesResponse> {
   const response = await fetch(
     `https://rickandmortyapi.com/api/episode?page=${page}&name=${name}&episode=${episode}`,
     {
@@ -23,14 +27,22 @@ async function getEpisodes(name: string, page: number, episode: string): Promise
   return data;
 }
 
+type PageProps = {
+  searchParams: Promise<{
+    name?: string;
+    page?: number;
+    episode: string;
+  }>;
+};
+
 const EpisodesPage = async ({
   searchParams,
-}: {
-  searchParams: { name?: string, page?: number, episode: string };
-}) => {
-  const name = searchParams?.name || "";
-  const episode = searchParams?.episode || "";
-  const page = Number(searchParams.page) || 1;
+}: PageProps) => {
+  const resolvedSearchParams = await searchParams;
+
+  const name = resolvedSearchParams?.name || "";
+  const episode = resolvedSearchParams?.episode || "";
+  const page = Number(resolvedSearchParams.page) || 1;
   const episodes = await getEpisodes(name, page, episode);
   return (
     <>
@@ -42,7 +54,7 @@ const EpisodesPage = async ({
           <SearchBy />
         </div>
 
-        {'error' in episodes ? (
+        {"error" in episodes ? (
           <p className="text-center text-xl text-red-500 mt-10">
             Oops! It seems like nobody is here
           </p>
@@ -64,4 +76,3 @@ const EpisodesPage = async ({
 };
 
 export default EpisodesPage;
-

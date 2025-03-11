@@ -32,22 +32,26 @@ async function getCharacters(
   return data;
 }
 
-export default async function CharactersPage({
-  searchParams,
-}: {
-  searchParams: {
+type PageProps = {
+  searchParams: Promise<{
     name?: string;
     status: string;
     gender: string;
     species: string;
     page: number;
-  };
-}) {
-  const name = searchParams?.name || "";
-  const status = searchParams?.status || "";
-  const gender = searchParams?.gender || "";
-  const species = searchParams.species || "";
-  const page = Number(searchParams.page) || 1;
+  }>;
+};
+
+export default async function CharactersPage({
+  searchParams,
+}: PageProps) {
+  const resolvedSearchParams = await searchParams;
+
+  const name = resolvedSearchParams?.name || "";
+  const status = resolvedSearchParams?.status || "";
+  const gender = resolvedSearchParams?.gender || "";
+  const species = resolvedSearchParams.species || "";
+  const page = Number(resolvedSearchParams.page) || 1;
   const characters = await getCharacters(name, status, gender, species, page);
 
   return (
