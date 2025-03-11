@@ -1,6 +1,6 @@
 "use client";
 
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { useUpdateSearchParams } from "../utils/updateSearchParams";
 import { Input } from "@chakra-ui/react";
 import { Controller, useForm } from "react-hook-form";
