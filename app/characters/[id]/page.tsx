@@ -20,7 +20,7 @@ async function getCharacter(id: string) {
 export default async function CharacterPage({
   params,
 }: {
-  params: { id: string };
+  params: Record<string, string>;
 }) {
   const character: Character = await getCharacter(params.id);
 
