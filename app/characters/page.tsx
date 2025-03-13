@@ -10,6 +10,9 @@ import Head from "next/head";
 
 export const metadata: Metadata = {
   title: "Characters))",
+  icons: {
+    icon: '/favicon-characters.ico'
+  }
 };
 
 async function getCharacters(
@@ -27,7 +30,6 @@ async function getCharacters(
   );
 
   const data = await response.json();
-  console.log(data);
 
   return data;
 }
@@ -57,7 +59,7 @@ export default async function CharactersPage({
   return (
     <>
       <Head>
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/favicon-characters.ico" />
       </Head>
       <div className="max-w-screen-xl mx-auto px-4 sm:px-6 lg:px-8">
         <h1 className="pb-7 text-4xl font-bold text-white text-center">
@@ -94,7 +96,7 @@ export default async function CharactersPage({
             </div>
           </div>
         )}
-        {!("error" in characters) && (
+        {(!("error" in characters) && characters.results.length > 17) && (
           <Pagination page={page} items={characters.info} />
         )}
       </div>

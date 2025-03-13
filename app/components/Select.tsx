@@ -20,9 +20,15 @@ const SelectComp: React.FC<Props> = (props) => {
       defaultValue={searchParams.get(value) || ""}
       variant="filled"
       w="150px"
-      color={"black"}
+      color="black"
+      bg="white"
       _focus={{
         color: "white",
+        bg: "gray.700", 
+      }}
+      _hover={{
+        bg: "gray.200",
+        color: "black",
       }}
     >
       {optionArray.map((option) => (

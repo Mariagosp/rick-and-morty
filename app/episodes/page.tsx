@@ -7,6 +7,9 @@ import SearchBy from "../components/SearchBy";
 
 export const metadata: Metadata = {
   title: "Episodes))",
+  icons: {
+    icon: '/favicon-episodes.ico'
+  }
 };
 
 async function getEpisodes(
@@ -67,7 +70,7 @@ const EpisodesPage = async ({
             </div>
           </div>
         )}
-        {!("error" in episodes) && (
+        {(!("error" in episodes) && episodes.results.length > 17) && (
           <Pagination page={page} items={episodes.info} />
         )}
       </div>

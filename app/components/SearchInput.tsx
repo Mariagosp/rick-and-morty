@@ -19,8 +19,6 @@ const SearchInput: React.FC<Props> = ({ placeholder, isCode }) => {
   const searchParams = useSearchParams();
   const updateSearchParams = useUpdateSearchParams();
 
-  // const name = searchParams.get(!isCode ? "name" : "episode") || "";
-
   const { control, handleSubmit, setValue } = useForm<FormData>({
     resolver: yupResolver(searchSchema),
     defaultValues: {
@@ -44,9 +42,15 @@ const SearchInput: React.FC<Props> = ({ placeholder, isCode }) => {
             {...field}
             placeholder={placeholder}
             variant="filled"
-            color={"black"}
+            color="black"
+            bg="white"
             _focus={{
               color: "white",
+              bg: "gray.700",
+            }}
+            _hover={{
+              bg: "gray.200",
+              color: "black",
             }}
             w="200px"
             h="41px"

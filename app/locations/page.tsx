@@ -9,6 +9,9 @@ import { Metadata } from "next";
 
 export const metadata: Metadata = {
   title: "Locations))",
+  icons: {
+    icon: '/favicon-locations.ico'
+  }
 };
 
 async function getLocations(
@@ -74,7 +77,7 @@ const LocationsPage = async ({
           </div>
         </div>
       )}
-      {!("error" in locations) && (
+      {(!("error" in locations) && locations.results.length > 17) && (
         <Pagination items={locations.info} page={page} />
       )}
     </div>
